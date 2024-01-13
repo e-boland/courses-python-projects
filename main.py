@@ -376,15 +376,48 @@ def projet_tri_fichiers():
 
     # Boucle sur ces fichiers pour les déplacer :
     for file in my_files:
-        dossier_tri = dossier_download / mon_tri.get(file.suffix, "Autres")    # Si le suffix d'un fichier n'est pas
+        dossier_tri = dossier_download / mon_tri.get(file.suffix, "Autres")  # Si le suffix d'un fichier n'est pas
         # dans le dictionnaire mon_tri, le fichier ira dans "Autre"
-        dossier_tri.mkdir(exist_ok=True)    # Création du dossier
+        dossier_tri.mkdir(exist_ok=True)  # Création du dossier
         file.rename(dossier_tri / file.name)  # .rename permet de déplacer le fichier en renommant le chemin vers lui
 
 
+def projet_structured_folders():  # AUTOMATICALLY GENERATE STRUCTURED FOLDERS FROM A DICTIONARY
+    from pathlib import Path
 
+    # STARTING FOLDER'S PATH :
+    p = Path(r"C:\Users\Eva Boland\repositories\courses-python-projects\Project Structured Folders")
 
+    # DICTIONARY :
+    dic = {"Films": ["Le seigneur des anneaux",
+                     "Harry Potter",
+                     "Moon",
+                     "Forrest Gump"],
+           "Employes": ["Paul",
+                        "Pierre",
+                        "Marie"],
+           "Exercices": ["les_variables",
+                         "les_fichiers",
+                         "les_boucles"]}
+
+    # DICTIONARY LOOP :
+    for key, value in dic.items():
+        # CREATE A FOLDER'S PATH FOR EACH KEY FROM THE DICTIONARY :
+        folder_dic = p / str(key)
+        # CREATE THE FOLDER :
+        folder_dic.mkdir(exist_ok=True)
+        # LISTS LOOP :
+        for element in value:
+            # CREATE A FOLDER'S PATH FOR EACH ELEMENT FROM THE LISTS :
+            folder_list = folder_dic / element
+            # CREATE THE FOLDERS :
+            folder_list.mkdir(exist_ok=True)
+
+    """ for dossier_principal, sous_dossiers in dic.items():
+        for dossier in sous_dossiers:
+            chemin_dossier = p / dossier_principal / dossier
+            chemin_dossier.mkdir(exist_ok=True, parents=True) """
 
 
 if __name__ == '__main__':
-
+    pass
