@@ -419,5 +419,48 @@ def projet_structured_folders():  # AUTOMATICALLY GENERATE STRUCTURED FOLDERS FR
             chemin_dossier.mkdir(exist_ok=True, parents=True) """
 
 
+def project_sorted_data():  # Sorting by alphabetical order datas from a file into a new one
+    from pathlib import Path
+    file_path = Path(r"C:\Users\Eva Boland\repositories\courses-python-projects\Project Sorted Data\prenoms.txt")
+
+    # Getting the datas from the file into a list
+    with open(file_path, "r") as non_ordered_file:
+        content = non_ordered_file.read()  # Ces deux lignes peuvent être mises en une :
+        content_list = list(content.split())  # content_list = non_ordered_file.readlines()
+
+        # Cleaning the list
+        clean_list = list()
+        for name in content_list:
+            clean_name = name.strip("., ")
+            clean_list.append(clean_name)
+
+        # Sorting the list in alphabetical order
+        sorted_list = sorted(clean_list)
+
+        # Joining the list's datas with line breaks
+        new_content = "\n".join(sorted_list)
+
+        # Creating a new file
+        new_file_path = Path(
+            r"C:\Users\Eva Boland\repositories\courses-python-projects\Project Sorted Data\sorted-prenoms.txt")
+        new_file_path.touch(exist_ok=True)
+
+        # Writing the sorted datas in the new file
+        with open(new_file_path, "w") as ordered_file:
+            ordered_file.write(new_content)
+
+    """with open("/Users/thibh/Documents/prenoms.txt", "r") as f:
+    lines = f.read().splitlines()
+
+    prenoms = []
+    for line in lines:
+        prenoms.extend(line.split())
+    
+    prenoms_final = [prenom.strip(",. ") for prenom in prenoms]
+    
+    with open("/Users/thibh/Documents/prenoms_final.txt", "w") as f:
+        f.write("\n".join(sorted(prenoms_final)))"""
+
+
 if __name__ == '__main__':
     pass
