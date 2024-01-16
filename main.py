@@ -462,5 +462,12 @@ def project_sorted_data():  # Sorting by alphabetical order datas from a file in
         f.write("\n".join(sorted(prenoms_final)))"""
 
 
+def project_users_manager():
+    from m_user import get_users
+
+    print(get_users(10))
+
+
+
 if __name__ == '__main__':
-    pass
+    project_users_manager()
