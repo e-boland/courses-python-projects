@@ -11,20 +11,19 @@ class Car:
         print("-" * 50)
 
     def drive(self, km: float):
-        lost_fuel = (km * 5) / 100
-        self.fuel -= lost_fuel
+        potential: float = self.fuel * 100 / 5
+        driven = min(potential, km)
+        self.fuel -= driven / 100 * 5
+        self.distance += driven
+
+        print(f"You drove {'only ' if potential < km else ''}{driven} kilometers.")
 
         if self.fuel >= 10:
-            self.distance += km
-            print(f"You drove {km} kilometers.\nThe car has {self.fuel} liters of gasoline left.")
+            print(f"The car has {self.fuel} liters of gasoline left.")
         elif 10 > self.fuel > 0:
-            self.distance += km
-            print(f"You drove {km} kilometers.\nYou are almost out of fuel! The car has {self.fuel} liters of gasoline left.")
-        else:
-            over_km: float = (-self.fuel * 100) / 5
-            last_km = km - over_km
-            self.distance += last_km
-            print(f"You drove only {last_km} kilometers.\nYou're out of fuel! Please fill up the tank.")
+            print(f"You are almost out of fuel! The car has {self.fuel} liters of gasoline left.")
+        else:  # self.fuel == 0
+            print(f"You're out of fuel! Please fill up the tank.")
 
         print("-" * 50)
 
@@ -50,5 +49,3 @@ if __name__ == "__main__":
     my_car.driven_distance()
     my_car.drive(100)
     my_car.driven_distance()
-
-
